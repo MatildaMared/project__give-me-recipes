@@ -17,6 +17,7 @@
 	text-align: right;
 	width: calc(min(100%, 600px));
 
+
 	& h1 {
 		font-size: 56px;
 		font-weight: 800;

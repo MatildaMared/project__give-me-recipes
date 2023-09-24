@@ -32,7 +32,9 @@ const parser = StructuredOutputParser.fromZodSchema(
 				})
 			)
 			.describe("The recipe ingredients with quantity."),
-		instructions: z.array(z.string()).describe("The recipe instructions."),
+		instructions: z
+			.array(z.string())
+			.describe("The recipe instructions. Do not prefix with a number."),
 	})
 );
 
@@ -63,7 +65,7 @@ const generateRecipe = cache(async (content: string) => {
 	});
 
 	console.log("Generating recipe for ", content);
-	
+
 	const model = new OpenAI({
 		temperature: 0,
 		modelName: "gpt-3.5-turbo",
@@ -75,7 +77,6 @@ const generateRecipe = cache(async (content: string) => {
 	const result = await model.call(input);
 
 	try {
-		cache.update(input, "recipe", result);
 		return parser.parse(result);
 	} catch (err) {
 		console.log(err);
