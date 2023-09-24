@@ -15,8 +15,7 @@
 	flex-direction: column;
 	gap: 16px;
 	text-align: right;
-	width: calc(min(100%, 600px));
-
+	width: calc(min(100%, 700px));
 
 	& h1 {
 		font-size: 56px;

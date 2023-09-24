@@ -22,16 +22,11 @@ function SearchInput() {
 			<input
 				type="text"
 				className="border border-black/10 rounded-lg px-4 py-2 text-lg mr-2"
-				placeholder="Vad är du sugen på?"
+				placeholder="Vad är du sugen på? 🥳"
 				value={searchTerm}
 				onChange={handleChange}
 			/>
-			<button
-				type="submit"
-				className="bg-pink-400 text-white px-4 py-2 text-lg rounded-lg hover:bg-pink-500 transition-all"
-			>
-				Sök
-			</button>
+			<button type="submit">Ge mig ett recept!</button>
 		</form>
 	);
 }
