@@ -19,17 +19,26 @@
 
 	& .recipe-image {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
+		justify-content: space-between;
 		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 		padding-bottom: 16px;
 		gap: 16px;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 
 		& .button {
 			font-size: 16px;
 			cursor: pointer;
 			width: 100%;
 			max-width: 300px;
+			height: fit-content;
+			align-self: flex-end;
+
+			@media (max-width: 768px) {
+				align-self: center;
+			}
 		}
 	}
 
@@ -40,7 +49,7 @@
 		width: fit-content;
 		padding: 3px 6px;
 		border-radius: 6px;
-    align-self: flex-end;
+		align-self: flex-end;
 	}
 
 	& .image {
@@ -50,6 +59,10 @@
 		max-width: 300px;
 		aspect-ratio: 1/1;
 		border: 1px solid rgba(0, 0, 0, 0.05);
+
+		@media (max-width: 768px) {
+			align-self: center;
+		}
 
 		& .loading {
 			border-radius: 16px;
@@ -87,9 +100,9 @@
 		justify-content: space-between;
 		gap: 32px;
 
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 	}
 
 	& .ingredients {
