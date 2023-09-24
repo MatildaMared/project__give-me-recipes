@@ -7,7 +7,7 @@
 	align-items: center;
 	gap: 16px;
 
-	p {
+	& p {
 		font-size: 18px;
 	}
 }
