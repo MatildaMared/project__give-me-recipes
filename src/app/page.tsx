@@ -1,9 +1,10 @@
-import Image from "next/image";
+import SearchInput from "@/components/SearchInput";
 
-export default function Home() {
+export default async function Home() {
 	return (
 		<main>
 			<h1>Give me recipes! 🌭 🌮 💁🏼‍♀️</h1>
+			<SearchInput />
 		</main>
 	);
 }
