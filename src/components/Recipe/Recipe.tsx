@@ -1,14 +1,34 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Recipe } from "@/types/Recipe";
+import generateImageUrl from "@/utils/generateImage";
 import "./recipe.css";
+import { DotLoader } from "react-spinners";
 
 interface RecipeListProps {
 	recipe: Recipe;
-	imageUrl?: string;
 }
 
-function Recipe({ recipe, imageUrl }: RecipeListProps) {
+function Recipe({ recipe }: RecipeListProps) {
+	const [imageUrl, setImageUrl] = useState("https://img.plho.me/512");
+	const [imageLoading, setImageLoading] = useState(false);
+
+	const onGenerateImage = async () => {
+		setImageLoading(true);
+		const response = await fetch("/api/generate-image", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ title: recipe.title }),
+		});
+
+		const data = await response.json();
+		setImageUrl(data.imageUrl);
+		setImageLoading(false);
+	};
+
 	return (
 		<div className="recipe">
 			<div className="header">
@@ -17,11 +37,21 @@ function Recipe({ recipe, imageUrl }: RecipeListProps) {
 			</div>
 			<div className="recipe-image">
 				<div className="image">
-					{imageUrl && (
+					{imageLoading && (
+						<div className="loading">
+							<p>Laddar bild... 😋</p>
+							<DotLoader color="hotpink" size={64} loading={imageLoading} />
+						</div>
+					)}
+					{!imageLoading && imageUrl && (
 						<Image src={imageUrl} alt={recipe.title} width={512} height={512} />
 					)}
 				</div>
+				<button className="button" onClick={onGenerateImage}>
+					Låt AI generera en läcker bild!
+				</button>
 			</div>
+			<p className="portions">{recipe.numberOfPortions} portioner</p>
 			<section className="ingredients-instructions">
 				<div className="ingredients">
 					<h3>Ingredienser</h3>

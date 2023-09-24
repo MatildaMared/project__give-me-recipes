@@ -1,6 +1,5 @@
 import RecipeList from "@/components/Recipe";
 import generateRecipe from "@/utils/generateRecipe";
-import generateImageUrl from "@/utils/generateImage";
 import React from "react";
 import "./style.css";
 import Link from "next/link";
@@ -16,12 +15,10 @@ async function RecipePage({ params }: RecipePageProps) {
 
 	const recipe = await generateRecipe(decodedSearchTerm);
 
-	const imageUrl = await generateImageUrl(recipe!.title);
-
 	return (
 		<main>
 			{recipe && (
-				<RecipeList recipe={recipe} imageUrl={imageUrl} />
+				<RecipeList recipe={recipe} />
 			)}
 			<Link href="/" className="button">
 				Tillbaka till startsidan

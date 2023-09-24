@@ -9,25 +9,55 @@
 	border-radius: 16px;
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
 
-  & .header {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding-bottom: 16px;
-  }
+	& .header {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+		padding-bottom: 16px;
+	}
 
 	& .recipe-image {
 		display: flex;
-		justify-content: center;
-		width: 100%;
+		flex-direction: column;
+		align-items: center;
 		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 		padding-bottom: 16px;
+		gap: 16px;
+
+		& .button {
+			font-size: 16px;
+			cursor: pointer;
+			width: 100%;
+			max-width: 300px;
+		}
+	}
+
+	& .portions {
+		color: #fff;
+		font-size: 14px;
+		background-color: rgb(121, 121, 121);
+		width: fit-content;
+		padding: 3px 6px;
+		border-radius: 6px;
+    align-self: flex-end;
 	}
 
 	& .image {
 		border-radius: 16px;
 		overflow: hidden;
+		width: 100%;
+		max-width: 300px;
+		aspect-ratio: 1/1;
+		border: 1px solid rgba(0, 0, 0, 0.05);
+
+		& .loading {
+			border-radius: 16px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
 
 		& img {
 			width: 100%;
@@ -52,11 +82,15 @@
 		font-size: 18px;
 	}
 
-  & .ingredients-instructions {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-  }
+	& .ingredients-instructions {
+		display: flex;
+		justify-content: space-between;
+		gap: 32px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+	}
 
 	& .ingredients {
 		display: flex;
@@ -64,11 +98,11 @@
 		gap: 8px;
 	}
 
-  & .ingredients-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+	& .ingredients-list {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
 
 	& .instructions {
 		display: flex;
