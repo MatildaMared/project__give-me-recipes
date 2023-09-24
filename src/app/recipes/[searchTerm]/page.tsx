@@ -1,5 +1,5 @@
 import RecipeList from "@/components/Recipe";
-import { getRecipe } from "@/utils/generateRecipe";
+import { generateRecipe } from "@/utils/generateRecipe";
 import { generateImageUrl } from "@/utils/generateImage";
 import React from "react";
 
@@ -12,8 +12,7 @@ interface RecipePageProps {
 async function RecipePage({ params }: RecipePageProps) {
 	const decodedSearchTerm = decodeURIComponent(params.searchTerm);
 
-	const recipe = await getRecipe(decodedSearchTerm);
-	console.log(recipe);
+	const recipe = await generateRecipe(decodedSearchTerm);
 
 	const imageUrl = await generateImageUrl(recipe!.title);
 

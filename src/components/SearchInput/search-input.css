@@ -1,0 +1,29 @@
+.search-input {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 18px;
+
+	& input {
+		padding: 8px 16px;
+		border-radius: 8px;
+		font: inherit;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		width: 100%;
+	}
+
+	& button {
+		padding: 8px 16px;
+		border-radius: 8px;
+		background-color: hotpink;
+		color: #fff;
+		border: none;
+		cursor: pointer;
+		border: 1px solid transparent;
+		transition: all 0.2s ease-in-out;
+
+		&:hover {
+			background-color: #d13f88;
+		}
+	}
+}

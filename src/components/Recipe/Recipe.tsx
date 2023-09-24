@@ -1,21 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import { Recipe } from "@/types/Recipe";
 
 interface RecipeListProps {
-	recipe: {
-		title: string;
-		summary: string;
-		numberOfPortions: number;
-		ingredients: {
-			name: string;
-			quantity: string;
-		}[];
-		instructions: string[];
-	};
+	recipe: Recipe;
 	imageUrl?: string;
 }
 
-function RecipeList({ recipe, imageUrl }: RecipeListProps) {
+function Recipe({ recipe, imageUrl }: RecipeListProps) {
 	return (
 		<div>
 			<ul>
@@ -42,4 +34,4 @@ function RecipeList({ recipe, imageUrl }: RecipeListProps) {
 	);
 }
 
-export default RecipeList;
+export default Recipe;
