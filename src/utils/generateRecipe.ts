@@ -1,6 +1,14 @@
+import { InMemoryCache } from "langchain/cache";
 import { OpenAI } from "langchain/llms/openai";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import { PromptTemplate } from "langchain/prompts";
+import { cache } from "react";
+import { MomentoCache } from "langchain/cache/momento";
+import {
+	CacheClient,
+	Configurations,
+	CredentialProvider,
+} from "@gomomento/sdk";
 import z from "zod";
 
 const parser = StructuredOutputParser.fromZodSchema(
@@ -40,19 +48,38 @@ const getRecipePrompt = async (content: string) => {
 	return input;
 };
 
-export const generateRecipe = async (content: string) => {
-	const input = await getRecipePrompt(content);
+const generateRecipe = cache(async (content: string) => {
+	const client = new CacheClient({
+		configuration: Configurations.Laptop.v1(),
+		credentialProvider: CredentialProvider.fromEnvironmentVariable({
+			environmentVariableName: "MOMENTO_API_KEY",
+		}),
+		defaultTtlSeconds: 60 * 60 * 24 * 7,
+	});
 
+	const cache = await MomentoCache.fromProps({
+		client,
+		cacheName: "recipe",
+	});
+
+	console.log("Generating recipe for ", content);
+	
 	const model = new OpenAI({
 		temperature: 0,
 		modelName: "gpt-3.5-turbo",
+		cache: cache,
 	});
+
+	const input = await getRecipePrompt(content);
 
 	const result = await model.call(input);
 
 	try {
+		cache.update(input, "recipe", result);
 		return parser.parse(result);
 	} catch (err) {
 		console.log(err);
 	}
-};
+});
+
+export default generateRecipe;

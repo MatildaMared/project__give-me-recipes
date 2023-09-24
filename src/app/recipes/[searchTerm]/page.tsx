@@ -1,7 +1,8 @@
 import RecipeList from "@/components/Recipe";
-import { generateRecipe } from "@/utils/generateRecipe";
-import { generateImageUrl } from "@/utils/generateImage";
+import generateRecipe from "@/utils/generateRecipe";
+import generateImageUrl from "@/utils/generateImage";
 import React from "react";
+import "./style.css";
 
 interface RecipePageProps {
 	params: {
@@ -14,13 +15,14 @@ async function RecipePage({ params }: RecipePageProps) {
 
 	const recipe = await generateRecipe(decodedSearchTerm);
 
-	const imageUrl = await generateImageUrl(recipe!.title);
+	// const imageUrl = await generateImageUrl(recipe!.title);
 
 	return (
-		<div>
-			RecipePage
-			{recipe && <RecipeList recipe={recipe} imageUrl={imageUrl} />}
-		</div>
+		<main>
+			{recipe && (
+				<RecipeList recipe={recipe} imageUrl={"https://img.plho.me/512"} />
+			)}
+		</main>
 	);
 }
 
